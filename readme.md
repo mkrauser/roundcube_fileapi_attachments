@@ -7,6 +7,11 @@ Matthias Krauser
 
 ## Changelog
 
+### 0.6.0 (2011-10-01)
+* changed api to support roundcube 0.6
+* migrated from private svn repository to github (https://github.com/mkrauser/roundcube_fileapi_attachments)
+* changed versioning to match roundcube versions (plugin versions 0.6.x will be for roundcube 0.6.x, 0.7.x will work with rc 0.7 etc).
+
 ### 0.3.0 (2011-03-17)
 * added support for Webkit-Browsers (Chrome and others) (thanks to Thomas Yu for the Patch)
 
