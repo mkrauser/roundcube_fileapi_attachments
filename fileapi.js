@@ -74,7 +74,7 @@ if (typeof FileReader !== "undefined") {
       xhr.onreadystatechange = FA.onReadyStateChange;
       fileUpload.addEventListener("error", FA.uploadError, false);
 
-      xhr.open("POST", rcmail.env.comm_path+'&_action=plugin.upload_fileapi&_name=' + file.name + '&_uploadid='+ts);
+      xhr.open("POST", rcmail.env.comm_path+'&_action=plugin.upload_fileapi&_id=' + rcmail.env.compose_id + '&_name=' + file.name + '&_uploadid='+ts);
       xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
       xhr.send(file);
     };
@@ -149,7 +149,7 @@ if (typeof FileReader !== "undefined") {
         }*/
       }
     };
-
+        
     window.addEventListener("load", FA.setup, false);
   })();
 }
