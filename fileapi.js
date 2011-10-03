@@ -123,7 +123,7 @@ if (typeof FileReader !== "undefined") {
           ];
 
           domElements[1].href= '#delete';
-          domElements[1].onclick= function() {alert('x')/*return rcmail.command('remove-attachment','rcmfile11296501808069671300', this)*/;};
+          domElements[1].onclick= function() {return rcmail.command('remove-attachment','rcmfile'+ts, this);};
           domElements[1].title= 'Delete';
           domElements[2].src = 'skins/default/images/icons/delete.png';
           domElements[3].src = 'skins/default/images/display/loading_blue.gif';
