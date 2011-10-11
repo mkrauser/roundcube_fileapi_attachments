@@ -27,12 +27,12 @@ Matthias Krauser
 
 ## Roadmap
 
-### 0.4
+### next release
 * Improve the design, a bit like the drop-area shown here (https://github.com/silverstripe/silverstripe-design/blob/master/Design/ss3-ui_files-manager-add-files.jpg)
 
 ## Requirements
 
-- Roundcube 0.5 (userd for development and testing)
+- Roundcube 0.6 (used for development and testing of 0.6-branch)
 - In this Version, Firefox 3.6+ and Chrome are supported
 
 ## Documentation
