@@ -40,8 +40,8 @@ class fileapi_attachments extends rcube_plugin
   {
     $rcmail = rcmail::get_instance();
 
-    $uploadid = get_input_value('_uploadid', RCUBE_INPUT_GET);
     $group = get_input_value('_id', RCUBE_INPUT_GET);
+    $_SESSION['compose'] = $_SESSION['compose_data_'.$group];
 
     $temp_dir = $rcmail->config->get('temp_dir');
     $tmpfname = tempnam($temp_dir, 'rcmAttmnt');
@@ -60,7 +60,8 @@ class fileapi_attachments extends rcube_plugin
           'path' => $tmpfname,
           'size' => filesize($tmpfname),
           'name' => $_GET['_name'],
-          'mimetype' => rc_mime_content_type($tmpfname, $_GET['_name'])
+          'mimetype' => rc_mime_content_type($tmpfname, $_GET['_name']),
+          'group' => $group
       );
 
       //this call would use move_uploaded_file, so it wont work with our tempfile
@@ -69,13 +70,10 @@ class fileapi_attachments extends rcube_plugin
       $attachment['id'] = $this->file_id();
       $attachment['path'] = $tmpfname;
 
-      if (!is_array($_SESSION['plugins']['filesystem_attachments'][$group]))
-        $_SESSION['plugins']['filesystem_attachments'][$group] = array();
+      $id = $attachment['id'];
+      $_SESSION['compose']['attachments'][$id] = $attachment;
 
-      $_SESSION['plugins']['filesystem_attachments'][$group][] = $tmpfname;
-      $_SESSION['compose_data'][$group]['attachments'][$uploadid] = $attachment;
-
-      if (($icon = $_SESSION['compose_data'][$group]['deleteicon']) && is_file($icon))
+      if (($icon = $_SESSION['compose']['deleteicon']) && is_file($icon))
       {
         $button = html::img(array(
                     'src' => $icon,
@@ -89,17 +87,17 @@ class fileapi_attachments extends rcube_plugin
 
       $content = html::a(array(
                   'href' => "#delete",
-                  'onclick' => sprintf("return %s.command('remove-attachment','rcmfile%s', this)", JS_OBJECT_NAME, $uploadid),
+                  'onclick' => sprintf("return %s.command('remove-attachment','rcmfile%s', this)", JS_OBJECT_NAME, $id),
                   'title' => rcube_label('delete'),
                       ), $button);
 
       $content .= Q($attachment['name']);
 
-      $rcmail->output->command('add2attachment_list', "rcmfile$uploadid", array(
+      $rcmail->output->command('add2attachment_list', "rcmfile$id", array(
           'html' => $content,
           'name' => $attachment['name'],
           'mimetype' => $attachment['mimetype'],
-          'complete' => true), $uploadid);
+          'complete' => true), $id);
     }
 
     // send html page with JS calls as response
