@@ -41,7 +41,6 @@ class fileapi_attachments extends rcube_plugin
     $rcmail = rcmail::get_instance();
 
     $group = get_input_value('_id', RCUBE_INPUT_GET);
-    $_SESSION['compose'] = $_SESSION['compose_data_'.$group];
 
     $temp_dir = $rcmail->config->get('temp_dir');
     $tmpfname = tempnam($temp_dir, 'rcmAttmnt');
@@ -57,23 +56,21 @@ class fileapi_attachments extends rcube_plugin
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
       $attachment = array(
-          'path' => $tmpfname,
-          'size' => filesize($tmpfname),
-          'name' => $_GET['_name'],
+          'path'     => $tmpfname,
+          'size'     => filesize($tmpfname),
+          'name'     => $_GET['_name'],
           'mimetype' => rc_mime_content_type($tmpfname, $_GET['_name']),
-          'group' => $group
+          'group'    => $group,
+          'id'       => $this->file_id()
       );
 
       //this call would use move_uploaded_file, so it wont work with our tempfile
       //$attachment = $rcmail->plugins->exec_hook('attachment_upload', $attachment);
 
-      $attachment['id'] = $this->file_id();
-      $attachment['path'] = $tmpfname;
-
       $id = $attachment['id'];
-      $_SESSION['compose']['attachments'][$id] = $attachment;
+      $_SESSION['compose_data_'.$group]['attachments'][$id] = $attachment;
 
-      if (($icon = $_SESSION['compose']['deleteicon']) && is_file($icon))
+      if (($icon = $_SESSION['compose_data_'.$group]['deleteicon']) && is_file($icon))
       {
         $button = html::img(array(
                     'src' => $icon,

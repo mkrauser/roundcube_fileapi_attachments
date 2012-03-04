@@ -7,6 +7,9 @@ Matthias Krauser
 
 ## Changelog
 
+### 0.7.0 (2012-03-04)
+* changed api to support roundcube 0.7
+
 ### 0.6.0 (2011-10-01)
 * changed api to support roundcube 0.6
 * migrated from private svn repository to github (https://github.com/mkrauser/roundcube_fileapi_attachments)
