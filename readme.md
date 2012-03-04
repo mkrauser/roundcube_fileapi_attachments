@@ -3,7 +3,8 @@
 ## Maintainer Contact
 
 Matthias Krauser
-<matthias (at) krauser (dot) eu >
+mail:    <matthias (at) krauser (dot) eu >
+twitter: @mat_krauser 
 
 ## Changelog
 
