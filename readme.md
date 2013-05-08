@@ -1,5 +1,8 @@
 # Roundcube FileAPI-Attachments ![project status](http://stillmaintained.com/mkrauser/roundcube_fileapi_attachments.png) #
 
+
+**Attention**: as of version 0.9 Roundcube supports uploads via fileapi. So this plugin is no longer necessary. I will accept bugfixes for RC-Versions < 0.9 but there will be no new versions.
+
 ## Maintainer Contact
 
 Matthias Krauser
